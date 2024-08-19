@@ -1,0 +1,53 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+
+
+   0000                       1 _calcula_y::
+   0000 21 80 C7      [10]    2     ld hl,#0xc780   ;;direccion original,ejemplo. es 10 ROW,LINE 4
+   0003 11 00 C0      [10]    3     ld de,#0xc000
+   0006 ED 52         [15]    4     sbc hl,de        ;;restamos origen inicio pantalla
+   0008 3E 00         [ 7]    5     ld a,#0
+   000A 32 40 00      [13]    6     ld (y),a 
+   000D 32 41 00      [13]    7     ld (y_l),a  
+   0010                       8 y_LINE::
+   0010 7D            [ 4]    9   ld a,l
+   0011 E6 78         [ 7]   10   and #0b1111000
+   0013 0F            [ 4]   11     rrca
+   0014 0F            [ 4]   12     rrca
+   0015 0F            [ 4]   13     rrca
+   0016 32 41 00      [13]   14      ld (y_l),a
+   0019 4F            [ 4]   15     ld c,a
+   001A                      16 y_ROW::
+   001A 2A 48 00      [16]   17   ld hl,(_pvmem)
+   001D 11 00 C0      [10]   18   ld de,#0xc000
+   0020 ED 52         [15]   19   sbc hl,de
+   0022                      20  loop_h:
+   0022 7C            [ 4]   21     ld a,h
+   0023 B7            [ 4]   22     or a
+   0024 28 11         [12]   23       jr z,fin_h
+   0026                      24  loop_l:
+   0026 7D            [ 4]   25     ld a,l
+   0027 D6 50         [ 7]   26     sub #0x50
+   0029 6F            [ 4]   27     ld l,a
+   002A 7C            [ 4]   28     ld a,h
+   002B DE 00         [ 7]   29     sbc a,#0
+   002D 67            [ 4]   30     ld h,a 
+   002E 3A 40 00      [13]   31     ld a,(y)
+   0031 3C            [ 4]   32     inc a 
+   0032 32 40 00      [13]   33     ld (y),a
+   0035 18 EB         [12]   34   jr loop_h
+   0037                      35 fin_h:
+   0037 7D            [ 4]   36   ld a,l 
+   0038 B7            [ 4]   37   or a 
+   0039 28 02         [12]   38     jr z,fin_l
+   003B 18 E9         [12]   39   jr loop_l
+   003D                      40 fin_l:
+   003D 18 FE         [12]   41 jr .
+   003F C9            [10]   42 ret
+   0040 00                   43 y: .db 0
+   0041 00                   44 y_l: .db 0
+   0042 00 08                45 siguiente_linea:: .dw 0x0800
+   0044 50 00                46 siguiente_caracter:: .dw 0x0050
+   0046 AD DE                47 temp_hl:: .dw 0xdead
+   0048 80 C7                48 _pvmem:: .dw 0xc780

@@ -1,0 +1,109 @@
+ASxxxx Linker V03.00 + NoICE + sdld,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           cpct_firmware
+     00000000  l__CABS                         
+     00000000  l__DABS                         
+     00000000  l__GSFINAL                      
+     00000000  l__GSINIT                       
+     00000000  l__HOME                         
+     00000000  l__INITIALIZED                  
+     00000000  l__INITIALIZER                  
+     00000000  s__CABS                         
+     00000000  s__DABS                         
+     00000005  l__DATA                         
+     00000CDC  l__CODE                         
+     00004000  s__CODE                         
+     00004CDC  s__DATA                         
+     00004CE1  s__GSFINAL                      
+     00004CE1  s__GSINIT                       
+     00004CE1  s__HOME                         
+     00004CE1  s__INITIALIZED                  
+     00004CE1  s__INITIALIZER                  
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00004000    00000CDC =        3292. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00004000  _calcula_y_c                       calcula_y_c
+     00004091  _main                              main
+     000040A7  _calcula_y                         
+     000040B7  y_LINE                             
+     000040C1  y_ROW                              
+     000040E9  siguiente_linea                    
+     000040EB  siguiente_caracter                 
+     000040ED  temp_hl                            
+     000040EF  _pvmem                             
+     000040F1  __divuint                          
+     000040F9  __divuchar                         
+     00004100  __divu8                            
+     00004103  __divu16                           
+     0000413F  _vprintf                           vprintf
+     0000415F  _printf                            vprintf
+     0000427B  __print_format                     printf_large
+     00004CBD  _putchar                           cpct_strings
+     00004CBD  _putchar_rr_s                      cpct_strings
+     00004CC6  _putchar_rr_dbs                    cpct_strings
+     00004CCB  ___sdcc_call_hl                    
+     00004CCC  _strlen                            
+     00004CDB  _cpct_mode_rom_status              cpct_firmware
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_DATA                               00004CDC    00000005 =           5. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00004CDC  _new_pvmem                         calcula_y_c
+     00004CDE  _y                                 calcula_y_c
+     00004CDF  _y_f                               calcula_y_c
+     00004CE0  _y_m                               calcula_y_c
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
+
+Files Linked                              [ module(s) ]
+
+obj/calcula_y_c.rel                       [ calcula_y_c ]
+obj/main.rel                              [ main ]
+obj/_calcula_y.rel                        [  ]
+
+
+Libraries Linked                          [ object file ]
+
+/home/papi/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ divunsigned.rel ]
+/home/papi/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ vprintf.rel ]
+/home/papi/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ printf_large.rel ]
+/home/papi/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_putChar.rel ]
+/home/papi/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ __sdcc_call_hl.rel ]
+/home/papi/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ strlen.rel ]
+/home/papi/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpc_mode_rom_status.rel ]
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+
+User Base Address Definitions
+
+_CODE = 0x4000
+_DATA = 0x0000
+
+
