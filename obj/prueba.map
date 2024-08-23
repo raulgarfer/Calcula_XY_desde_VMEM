@@ -18,60 +18,64 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  s__CABS                         
      00000000  s__DABS                         
      00000005  l__DATA                         
-     00000CDC  l__CODE                         
+     00000D0C  l__CODE                         
      00004000  s__CODE                         
-     00004CDC  s__DATA                         
-     00004CE1  s__GSFINAL                      
-     00004CE1  s__GSINIT                       
-     00004CE1  s__HOME                         
-     00004CE1  s__INITIALIZED                  
-     00004CE1  s__INITIALIZER                  
+     00004D0C  s__DATA                         
+     00004D11  s__GSFINAL                      
+     00004D11  s__GSINIT                       
+     00004D11  s__HOME                         
+     00004D11  s__INITIALIZED                  
+     00004D11  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00000CDC =        3292. bytes (REL,CON)
+_CODE                               00004000    00000D0C =        3340. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
      00004000  _calcula_y_c                       calcula_y_c
      00004091  _main                              main
-     000040A7  _calcula_y                         
-     000040B7  y_LINE                             
-     000040C1  y_ROW                              
-     000040E9  siguiente_linea                    
-     000040EB  siguiente_caracter                 
-     000040ED  temp_hl                            
-     000040EF  _pvmem                             
-     000040F1  __divuint                          
-     000040F9  __divuchar                         
-     00004100  __divu8                            
-     00004103  __divu16                           
-     0000413F  _vprintf                           vprintf
-     0000415F  _printf                            vprintf
-     0000427B  __print_format                     printf_large
-     00004CBD  _putchar                           cpct_strings
-     00004CBD  _putchar_rr_s                      cpct_strings
-     00004CC6  _putchar_rr_dbs                    cpct_strings
-     00004CCB  ___sdcc_call_hl                    
-     00004CCC  _strlen                            
-     00004CDB  _cpct_mode_rom_status              cpct_firmware
-
+     000040A4  _calcula_y                         
+     000040BA  y_LINE                             
+     000040CF  y_ROW                              
+     000040EE  calcula_x                          
+     00004100  y                                  
+     00004101  y_l                                
+     00004102  x                                  
+     00004103  siguiente_linea                    
+     00004105  siguiente_caracter                 
+     00004107  t_pvmem                            
+     00004109  _pvmem                             
+     0000410B  __divuint                          
+     00004113  __divuchar                         
+     0000411A  __divu8                            
+     0000411D  __divu16                           
+     00004159  _vprintf                           vprintf
+     00004179  _printf                            vprintf
+     00004196  _cpct_getScreenPtr                 cpct_video
+     000042AB  __print_format                     printf_large
+     00004CED  _putchar                           cpct_strings
+     00004CED  _putchar_rr_s                      cpct_strings
+     00004CF6  _putchar_rr_dbs                    cpct_strings
+     00004CFB  ___sdcc_call_hl                    
+     00004CFC  _strlen                            
+     00004D0B  _cpct_mode_rom_status              cpct_firmware
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               00004CDC    00000005 =           5. bytes (REL,CON)
+_DATA                               00004D0C    00000005 =           5. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00004CDC  _new_pvmem                         calcula_y_c
-     00004CDE  _y                                 calcula_y_c
-     00004CDF  _y_f                               calcula_y_c
-     00004CE0  _y_m                               calcula_y_c
+     00004D0C  _new_pvmem                         calcula_y_c
+     00004D0E  _y                                 calcula_y_c
+     00004D0F  _y_f                               calcula_y_c
+     00004D10  _y_m                               calcula_y_c
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 
@@ -88,6 +92,8 @@ Libraries Linked                          [ object file ]
                                           [ divunsigned.rel ]
 /home/papi/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
                                           [ vprintf.rel ]
+/home/papi/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_getScreenPtr_cbindings.rel ]
 /home/papi/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
                                           [ printf_large.rel ]
 /home/papi/cpctelera/cpctelera/cpctelera.lib

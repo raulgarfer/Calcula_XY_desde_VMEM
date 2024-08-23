@@ -17,21 +17,18 @@
 //------------------------------------------------------------------------------
 
 #include <cpctelera.h>
+extern u8 *pvmem;
 
 void main(void) {
-   u8* pvmem;  // Pointer to video memory
-   int y; 
-   u8 h; 
-      calcula_y();
-   h=0xd2;
-   y=0;
-   pvmem = (u8*)(0xc2d0);
-   pvmem -=(0xc000);
-  while (pvmem>0){
-   pvmem -=0x0050;
-   y++;
-
-  }
+  // u8* pvmem;  // Pointer to video memory
+   u8 *pvmem_c;
+   u8 x,y; 
+   x=20;
+   y=30;
+   pvmem_c = cpct_getScreenPtr(0xc000,x,y);
+   pvmem =  pvmem_c;
+   calcula_y();
+  
    //cpct_drawStringM1(y,(u8*)pvmem);
    // Loop forever
    while (1);

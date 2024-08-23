@@ -4,50 +4,81 @@ Hexadecimal [16-Bits]
 
 
    0000                       1 _calcula_y::
-   0000 21 80 C7      [10]    2     ld hl,#0xc780   ;;direccion original,ejemplo. es 10 ROW,LINE 4
+   0000 2A 65 00      [16]    2     ld hl,(_pvmem)   ;;direccion original,ejemplo. es 10 ROW,LINE 4
    0003 11 00 C0      [10]    3     ld de,#0xc000
    0006 ED 52         [15]    4     sbc hl,de        ;;restamos origen inicio pantalla
-   0008 3E 00         [ 7]    5     ld a,#0
-   000A 32 40 00      [13]    6     ld (y),a 
-   000D 32 41 00      [13]    7     ld (y_l),a  
-   0010                       8 y_LINE::
-   0010 7D            [ 4]    9   ld a,l
-   0011 E6 78         [ 7]   10   and #0b1111000
-   0013 0F            [ 4]   11     rrca
-   0014 0F            [ 4]   12     rrca
-   0015 0F            [ 4]   13     rrca
-   0016 32 41 00      [13]   14      ld (y_l),a
-   0019 4F            [ 4]   15     ld c,a
-   001A                      16 y_ROW::
-   001A 2A 48 00      [16]   17   ld hl,(_pvmem)
-   001D 11 00 C0      [10]   18   ld de,#0xc000
-   0020 ED 52         [15]   19   sbc hl,de
-   0022                      20  loop_h:
-   0022 7C            [ 4]   21     ld a,h
-   0023 B7            [ 4]   22     or a
-   0024 28 11         [12]   23       jr z,fin_h
-   0026                      24  loop_l:
-   0026 7D            [ 4]   25     ld a,l
-   0027 D6 50         [ 7]   26     sub #0x50
-   0029 6F            [ 4]   27     ld l,a
-   002A 7C            [ 4]   28     ld a,h
-   002B DE 00         [ 7]   29     sbc a,#0
-   002D 67            [ 4]   30     ld h,a 
-   002E 3A 40 00      [13]   31     ld a,(y)
-   0031 3C            [ 4]   32     inc a 
-   0032 32 40 00      [13]   33     ld (y),a
-   0035 18 EB         [12]   34   jr loop_h
-   0037                      35 fin_h:
-   0037 7D            [ 4]   36   ld a,l 
-   0038 B7            [ 4]   37   or a 
-   0039 28 02         [12]   38     jr z,fin_l
-   003B 18 E9         [12]   39   jr loop_l
-   003D                      40 fin_l:
-   003D 18 FE         [12]   41 jr .
-   003F C9            [10]   42 ret
-   0040 00                   43 y: .db 0
-   0041 00                   44 y_l: .db 0
-   0042 00 08                45 siguiente_linea:: .dw 0x0800
-   0044 50 00                46 siguiente_caracter:: .dw 0x0050
-   0046 AD DE                47 temp_hl:: .dw 0xdead
-   0048 80 C7                48 _pvmem:: .dw 0xc780
+   0008 22 65 00      [16]    5     ld (_pvmem),hl
+   000B 3E 00         [ 7]    6     ld a,#0
+   000D 32 5C 00      [13]    7     ld (y),a 
+   0010 32 5D 00      [13]    8     ld (y_l),a 
+   0013 32 5E 00      [13]    9     ld (x),a 
+   0016                      10 y_LINE::
+   0016 7C            [ 4]   11   ld a,h
+   0017 E6 38         [ 7]   12   and #0b00111000   ;;
+   0019 67            [ 4]   13   ld h,a
+   001A 0F            [ 4]   14     rrca
+   001B 0F            [ 4]   15     rrca
+   001C 0F            [ 4]   16     rrca
+   001D 32 5D 00      [13]   17      ld (y_l),a
+   0020 4F            [ 4]   18     ld c,a
+   0021 2A 65 00      [16]   19   ld hl,(_pvmem)
+   0024 7C            [ 4]   20   ld a,h
+   0025 E6 07         [ 7]   21   and #0b00000111
+   0027 67            [ 4]   22   ld h,a
+   0028 22 65 00      [16]   23   ld (_pvmem),hl
+   002B                      24 y_ROW::
+                             25 ;;0b 0000 0RRR RRRR 0000
+   002B 2A 65 00      [16]   26   ld hl,(_pvmem)
+   002E                      27  loop_h:
+   002E 7C            [ 4]   28     ld a,h
+   002F B7            [ 4]   29     or a
+   0030 28 11         [12]   30       jr z,fin_h
+   0032                      31  loop_l:
+   0032 7D            [ 4]   32     ld a,l
+   0033 D6 50         [ 7]   33     sub #0x50
+   0035 6F            [ 4]   34     ld l,a
+   0036 7C            [ 4]   35     ld a,h
+   0037 DE 00         [ 7]   36     sbc a,#0
+   0039 67            [ 4]   37     ld h,a 
+   003A 3A 5C 00      [13]   38     ld a,(y)
+   003D 3C            [ 4]   39     inc a 
+   003E 32 5C 00      [13]   40     ld (y),a
+   0041 18 EB         [12]   41   jr loop_h
+   0043                      42 fin_h:
+                             43   ;;ld a,l 
+                             44   ;;or a 
+                             45   ;;  jr z,fin_l
+   0043 7D            [ 4]   46   ld a,l
+   0044 D6 50         [ 7]   47   sub #0x50
+   0046 38 02         [12]   48     jr c,calcula_x
+   0048 18 E8         [12]   49   jr loop_l
+   004A                      50 calcula_x::
+   004A 3A 5C 00      [13]   51   ld a,(y)  ;;ultima ROW
+                             52   ;;inc a     ;;en ROW 0 sumara?
+                             53   ;;ld (y),a  ;;si suma, empezar en -1 la (Y)
+   004D 07            [ 4]   54   rlca
+   004E 07            [ 4]   55   rlca
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+
+
+   004F 07            [ 4]   56   rlca
+                             57   
+   0050 81            [ 4]   58   add c
+   0051 4F            [ 4]   59   ld c,a    ;;carga en C la posicion Y
+                             60   ;;0B 0000 0000 0001 1111
+   0052 7D            [ 4]   61   ld a,l
+   0053 E6 1F         [ 7]   62   and #0b00011111
+   0055 32 5E 00      [13]   63   ld (x),a
+   0058 47            [ 4]   64   ld b,a
+   0059                      65 fin_l:
+   0059 18 FE         [12]   66 jr .
+   005B C9            [10]   67 ret
+   005C 00                   68 y:: .db 0
+   005D 00                   69 y_l:: .db 0
+   005E 00                   70 x:: .db 0
+   005F 00 08                71 siguiente_linea:: .dw 0x0800
+   0061 50 00                72 siguiente_caracter:: .dw 0x0050
+   0063 AD DE                73 t_pvmem:: .dw 0xdead
+   0065 AA E0                74 _pvmem:: .dw 0xe0aa

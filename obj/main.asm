@@ -9,6 +9,7 @@
 ; Public variables in this module
 ;--------------------------------------------------------
 	.globl _main
+	.globl _cpct_getScreenPtr
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -40,31 +41,23 @@
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;src/main.c:21: void main(void) {
+;src/main.c:22: void main(void) {
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
-;src/main.c:25: calcula_y();
+;src/main.c:28: pvmem_c = cpct_getScreenPtr(0xc000,x,y);
+	ld	hl, #0x1e14
+	push	hl
+	ld	hl, #0xc000
+	push	hl
+	call	_cpct_getScreenPtr
+	ld	(_pvmem), hl
+;src/main.c:30: calcula_y();
 	call	_calcula_y
-;src/main.c:30: while (pvmem>0){
-	ld	bc, #0x02d0
-00101$:
-	ld	a, b
-	or	a,c
-	jr	Z,00105$
-;src/main.c:31: pvmem -=0x0050;
-	ld	a, c
-	add	a, #0xb0
-	ld	c, a
-	ld	a, b
-	adc	a, #0xff
-	ld	b, a
-;src/main.c:32: y++;
-	jr	00101$
-;src/main.c:37: while (1);
-00105$:
-	jr	00105$
+;src/main.c:34: while (1);
+00102$:
+	jr	00102$
 	.area _CODE
 	.area _INITIALIZER
 	.area _CABS (ABS)

@@ -8,14 +8,17 @@ Symbol Table
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
     _calcula_y                                                     **** GX
+    _cpct_getScreenPtr                                             **** GX
   0 _main                                                          0000 GR
+    _pvmem                                                         **** GX
+
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size   16   flags    0
+   0 _CODE                                      size   13   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

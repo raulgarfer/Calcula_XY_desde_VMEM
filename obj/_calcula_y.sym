@@ -4,16 +4,17 @@ Hexadecimal [16-Bits]
 Symbol Table
 
     .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
-    .__.H$L.=  0000 L   |   0 _calcula   0000 GR  |   0 _pvmem     0048 GR
-  0 fin_h      0037 R   |   0 fin_l      003D R   |   0 loop_h     0022 R
-  0 loop_l     0026 R   |   0 siguient   0044 GR  |   0 siguient   0042 GR
-  0 temp_hl    0046 GR  |   0 y          0040 R   |   0 y_LINE     0010 GR
-  0 y_ROW      001A GR  |   0 y_l        0041 R
+    .__.H$L.=  0000 L   |   0 _calcula   0000 GR  |   0 _pvmem     0065 GR
+  0 calcula_   004A GR  |   0 fin_h      0043 R   |   0 fin_l      0059 R
+  0 loop_h     002E R   |   0 loop_l     0032 R   |   0 siguient   0061 GR
+  0 siguient   005F GR  |   0 t_pvmem    0063 GR  |   0 x          005E GR
+  0 y          005C GR  |   0 y_LINE     0016 GR  |   0 y_ROW      002B GR
+  0 y_l        005D GR
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE      size   4A   flags    0
+   0 _CODE      size   67   flags    0
 

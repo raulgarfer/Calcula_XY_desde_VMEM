@@ -1,22 +1,29 @@
 _calcula_y::
-    ld hl,#0xc780   ;;direccion original,ejemplo. es 10 ROW,LINE 4
-    ld de,#0xc000
-    sbc hl,de        ;;restamos origen inicio pantalla
+    ld hl,(_pvmem)    ;;direccion original
+    ld de,#0xc000     ;;restamos origen inicio pantalla
+    sbc hl,de         ;;guardamos
+    ld (_pvmem),hl
     ld a,#0
     ld (y),a 
-    ld (y_l),a  
+    ld (y_l),a 
+    ld (x),a 
 y_LINE::
-  ld a,l
-  and #0b1111000
+  ld a,h
+  and #0b00111000   ;;
+  ld h,a
     rrca
     rrca
     rrca
      ld (y_l),a
     ld c,a
-y_ROW::
   ld hl,(_pvmem)
-  ld de,#0xc000
-  sbc hl,de
+  ld a,h
+  and #0b00000111
+  ld h,a
+  ld (_pvmem),hl
+y_ROW::
+;;0b 0000 0RRR RRRR 0000
+  ld hl,(_pvmem)
  loop_h:
     ld a,h
     or a
@@ -33,16 +40,29 @@ y_ROW::
     ld (y),a
   jr loop_h
 fin_h:
-  ld a,l 
-  or a 
-    jr z,fin_l
+  ;;ld a,l 
+  ;;or a 
+  ;;  jr z,fin_l
+  ld a,l
+  sub #0x50
+    jr c,calcula_x
   jr loop_l
+calcula_x::
+  ld a,(y)  ;;ultima ROW
+  rlca      ;;multiplicamos por 8
+  rlca
+  rlca
+  add c     ;;y sumamos
+  ld c,a    ;;carga en C la posicion Y
+  ;;0B 0000 0000 0001 1111
+  ld a,l
+  and #0b00011111
+  ld (x),a
+  ld b,a
 fin_l:
 jr .
 ret
-y: .db 0
-y_l: .db 0
-siguiente_linea:: .dw 0x0800
-siguiente_caracter:: .dw 0x0050
-temp_hl:: .dw 0xdead
-_pvmem:: .dw 0xc780
+y:: .db 0
+y_l:: .db 0
+x:: .db 0
+_pvmem:: .dw 0xdead
