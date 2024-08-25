@@ -7,6 +7,9 @@ _calcula_y::
     ld hl,(_pvmem)    ;;direccion original
     ld de,#0xc000     ;;restamos origen inicio pantalla
     sbc hl,de         ;;guardamos
+    
+
+    
     ld (_pvmem),hl
     ld a,#0           
   
@@ -54,13 +57,11 @@ calcula_x::
   add c     ;;y sumamos
   ld c,a    ;;carga en C la posicion Y
   ;;0B 0000 0000 0001 1111
-  ld a,l
-  and #0b00011111
-  ld b,a
+  ld a,l            ;;se calcula la X
+  and #0b00011111   ;;cogemos la parte interesante de L
+  ld b,a            ;; y guardamos para devolver
 fin_l:
 jr .
 ret
-y:: .db 0
-y_l:: .db 0
-x:: .db 0
+
 _pvmem:: .dw 0xdead
